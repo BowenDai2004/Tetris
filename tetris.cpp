@@ -45,8 +45,9 @@ bool DoesPiecesFit(int nTetromino, int nRotation, int nPosX, int nPosY){
 }
 
 int main(){
-    mciSendString("open \"tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3\" type mpegvideo alias mp3", NULL, 0, NULL);
-    mciSendString("play mp3 repeat", NULL, 0, NULL);
+    mciSendString("open \"tetris-theme-korobeiniki-rearranged-arr-for-music-box-184978.mp3\" type mpegvideo alias bgm", NULL, 0, NULL);
+    mciSendString("play bgm repeat", NULL, 0, NULL);
+    mciSendString("open \"clear.mp3\" type mpegvideo alias clear", NULL, 0, NULL);
 
     //create assets
     tetromino[0].append(L"..X.");
@@ -208,6 +209,7 @@ int main(){
 
         if(!vLines.empty()){
             WriteConsoleOutputCharacterW(hConsole, screen, nScreenWidth * nScreenHeight, {0,0}, &dwBytesWritten);
+            mciSendString("play clear from 0", NULL, 0, NULL);
             Sleep(10);
             
             for(auto &v: vLines){
